@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventures - Goal Setting</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #fff;
+        }
+
+        .header h1 {
+            font-size: 24px;
+        }
+
+        .calendar-strip {
+            display: flex;
+            justify-content: space-around;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-day {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 16px;
+            cursor: pointer;
+        }
+
+        .calendar-day.active {
+            background-color: #6B8AFE;
+            color: white;
+        }
+
+        .calendar-day .day {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .calendar-day.active .day {
+            color: #fff;
+        }
+
+        .calendar-day .date {
+            font-weight: bold;
+            margin-top: 4px;
+        }
+
+        .goals-container {
+            padding: 1rem;
+        }
+
+        .goal-card {
+            border-radius: 16px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+
+        .goal-card:nth-child(1) {
+            background-color: #FF9F67;
+        }
+
+        .goal-card:nth-child(2) {
+            background-color: #9FE7D7;
+        }
+
+        .goal-card:nth-child(3) {
+            background-color: #FFD700;
+        }
+
+        .goal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quest-badge {
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+        }
+
+        .goal-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .goal-subtitle {
+            font-size: 14px;
+            opacity: 0.6;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            background-color: #fff;
+            padding: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .nav-item.active {
+            color: #6B8AFE;
+        }
+
+        .add-button {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            background-color: #6B8AFE;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(107, 138, 254, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button style="background: none; border: none; font-size: 24px;">☰</button>
+        <h1>Adventures</h1>
+        <button style="background: none; border: none; font-size: 24px;">👤</button>
+    </div>
+
+    <div class="calendar-strip">
+        <div class="calendar-day">
+            <span class="day">MO</span>
+            <span class="date">19</span>
+        </div>
+        <div class="calendar-day">
+            <span class="day">TU</span>
+            <span class="date">20</span>
+        </div>
+        <div class="calendar-day">
+            <span class="day">WE</span>
+            <span class="date">21</span>
+        </div>
+        <div class="calendar-day">
+            <span class="day">TH</span>
+            <span class="date">22</span>
+        </div>
+        <div class="calendar-day active">
+            <span class="day">FR</span>
+            <span class="date">23</span>
+        </div>
+        <div class="calendar-day">
+            <span class="day">SA</span>
+            <span class="date">24</span>
+        </div>
+        <div class="calendar-day">
+            <span class="day">SU</span>
+            <span class="date">25</span>
+        </div>
+    </div>
+
+    <div class="goals-container">
+        <div class="goal-card">
+            <div class="goal-header">
+                <span class="quest-badge">No active quests</span>
+                <span>⏰</span>
+            </div>
+            <h2 class="goal-title">Go to the gym 3 times a week</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 10%"></div>
+            </div>
+            <span class="progress-text">10%</span>
+        </div>
+
+        <div class="goal-card">
+            <div class="goal-header">
+                <span class="quest-badge">3 active quests</span>
+                <span>📚</span>
+            </div>
+            <h2 class="goal-title">Read the book</h2>
+            <p class="goal-subtitle">I want to read all the Harry Potter books</p>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 40%"></div>
+            </div>
+            <span class="progress-text">40%</span>
+        </div>
+
+        <div class="goal-card">
+            <div class="goal-header">
+                <span class="quest-badge">3 active quests</span>
+                <span>🏃‍♂️</span>
+            </div>
+            <h2 class="goal-title">Run in the morning</h2>
+            <p class="goal-subtitle">I want to run every morning for a month</p>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 50%"></div>
+            </div>
+            <span class="progress-text">50%</span>
+        </div>
+    </div>
+
+    <button class="add-button">+</button>
+
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <span style="font-size: 20px;">🏠</span>
+            Adventures
+        </a>
+        <a href="#" class="nav-item">
+            <span style="font-size: 20px;">📄</span>
+            Cronicle
+        </a>
+        <a href="#" class="nav-item">
+            <span style="font-size: 20px;">🏆</span>
+            Rewards
+        </a>
+        <a href="#" class="nav-item">
+            <span style="font-size: 20px;">📝</span>
+            Notes
+        </a>
+    </nav>
+
+    <script>
+        // Add interactivity to calendar days
+        document.querySelectorAll('.calendar-day').forEach(day => {
+            day.addEventListener('click', () => {
+                document.querySelector('.calendar-day.active').classList.remove('active');
+                day.classList.add('active');
+            });
+        });
+
+        // Add goal functionality
+        document.querySelector('.add-button').addEventListener('click', () => {
+            const title = prompt('Enter goal title:');
+            if (title) {
+                const goalCard = document.createElement('div');
+                goalCard.className = 'goal-card';
+                goalCard.innerHTML = `
+                    <div class="goal-header">
+                        <span class="quest-badge">No active quests</span>
+                        <span>🎯</span>
+                    </div>
+                    <h2 class="goal-title">${title}</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <span class="progress-text">0%</span>
+                `;
+                document.querySelector('.goals-container').appendChild(goalCard);
+            }
+        });
+
+        // Update progress functionality
+        document.querySelector('.goals-container').addEventListener('click', (e) => {
+            const goalCard = e.target.closest('.goal-card');
+            if (goalCard) {
+                const currentProgress = parseInt(goalCard.querySelector('.progress-text').textContent);
+                const newProgress = Math.min(100, currentProgress + 10);
+                goalCard.querySelector('.progress-fill').style.width = `${newProgress}%`;
+                goalCard.querySelector('.progress-text').textContent = `${newProgress}%`;
+            }
+        });
+
+        // Bottom navigation functionality
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelector('.nav-item.active').classList.remove('active');
+                item.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
